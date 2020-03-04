@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -27,8 +28,8 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   bool hadInit = false;
 
-  String text = "Welcome";
-  double fontSize = 46;
+  String text = "";
+  double fontSize = 76;
 
   @override
   void didChangeDependencies() {
@@ -40,10 +41,16 @@ class _WelcomePageState extends State<WelcomePage> {
 
     ///防止多次进入
     Store<GSYState> store = StoreProvider.of(context);
+    new Future.delayed(const Duration( milliseconds: 500), () {
+      setState(() {
+        text = "Welcome";
+        fontSize = 60;
+      });
+    });
     new Future.delayed(const Duration(seconds: 1, milliseconds: 500), () {
       setState(() {
         text = "GSYGithubApp";
-        fontSize = 41;
+        fontSize = 60;
       });
     });
     new Future.delayed(const Duration(seconds: 2, milliseconds: 500), () {
@@ -76,12 +83,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   alignment: Alignment(0.0, 0.3),
                   child: DiffScaleText(
                     text: text,
-                    textStyle: TextStyle(
-                      fontFamily: "google_kavivanar",
+                    textStyle: GoogleFonts.akronim().copyWith(
+                      color: GSYColors.primaryDarkValue,
                       fontSize: fontSize,
-                      //fontStyle: FontStyle.italic,
-                      color: GSYColors.primaryValue,
-                      fontWeight: FontWeight.bold
                     ),
                   ),
                 ),
